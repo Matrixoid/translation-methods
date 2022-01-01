@@ -1,0 +1,1 @@
+dot -Tsvg tree5.dot > graph5.svg

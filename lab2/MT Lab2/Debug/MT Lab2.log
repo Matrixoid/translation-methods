@@ -1,0 +1,10 @@
+﻿  MT Lab2.cpp
+C:\Users\tema\source\repos\MT\MT Lab2\Tree.h(23,15): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\tema\source\repos\MT\MT Lab2\lexical_analyzer.h(35,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\tema\source\repos\MT\MT Lab2\normalize_grammar.h(2,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+C:\Users\tema\source\repos\MT\MT Lab2\normalize_grammar.h(11,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\tema\source\repos\MT\MT Lab2\normalize_grammar.h(41,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\tema\source\repos\MT\MT Lab2\normalize_grammar.h(129,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\tema\source\repos\MT\MT Lab2\FirstFollowArrays.h(120,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\tema\source\repos\MT\MT Lab2\FirstFollowArrays.h(154,35): warning C4018: <: несоответствие типов со знаком и без знака
+  MT Lab2.vcxproj -> C:\Users\tema\source\repos\MT\Debug\MT Lab2.exe
