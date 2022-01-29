@@ -1,0 +1,54 @@
+run
+
+run returns [v : int]
+            = addSub {$v = addSub.v;}
+              END
+            ;
+
+addSub returns [v : int]
+            = mulDiv addSub_({mulDiv.v})
+              {$v = addSub_.v;}
+            ;
+
+addSub_(left : int) returns [v : int]
+            = ADD mulDiv    {int next = left + mulDiv.v;}
+              addSub_(next) {$v = addSub_.v;}
+            | SUB mulDiv    {int next = left - mulDiv.v;}
+              addSub_(next) {$v = addSub_.v;}
+            | {$v = left;}
+            ;
+
+mulDiv returns [v : int]
+            = revDiv mulDiv_({revDiv.v}) {$v = mulDiv_.v;}
+            ;
+
+mulDiv_(left : int) returns [v : int]
+            = MUL revDiv mulDiv_({left * revDiv.v}) {$v = mulDiv_.v;}
+            | DIV revDiv mulDiv_({left / revDiv.v}) {$v = mulDiv_.v;}
+            | {$v = left;}
+            ;
+
+revDiv returns [v : int]
+            = unary revDiv_({unary.v}) {$v = revDiv_.v;}
+            ;
+
+revDiv_(left : int) returns [v : int]
+            = REVERSEDIV revDiv {$v = (int) (revDiv.v/left);}
+            | {$v = left;}
+            ;
+
+unary returns [v : int]
+            = SUB unary {$v = -unary.v;}
+            | OP addSub CP {$v = addSub.v;}
+            | NUM          {$v = Integer.valueOf(NUM);}
+            ;
+
+ADD = "+";
+SUB = "-";
+MUL = "*";
+DIV = "/";
+REVERSEDIV = "\";
+OP = "(";
+CP = ")";
+NUM : "([1-9][0-9]*)|(0)";
+END = "$";

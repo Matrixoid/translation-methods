@@ -1,0 +1,51 @@
+expression
+
+expression returns [v : String]
+            = orXor {$v = orXor.v;}
+              END
+            ;
+
+orXor returns [v : String]
+            = and orXor_({and.v})
+              {$v = orXor_.v;}
+            ;
+
+orXor_(left : String) returns [v : String]
+            = OR and    {String next = left + " or " + and.v;}
+              orXor_(next) {$v = orXor_.v;}
+            | XOR and    {String next = left + " xor " + and.v;}
+              orXor_(next) {$v = orXor_.v;}
+            | {$v = left;}
+            ;
+
+and returns [v : String]
+            = not and_({not.v}) {$v = and_.v;}
+            ;
+
+and_(left : String) returns [v : String]
+            = AND not and_({left + " and " + not.v}) {$v = and_.v;}
+            | {$v = left;}
+            ;
+
+not returns [v : String]
+            = unary not_({unary.v}) {$v = not_.v;}
+            ;
+
+not_(left : String) returns [v : String]
+            = NOT not {$v = "not " + left;}
+            | {$v = left;}
+            ;
+
+unary returns [v : String]
+            = LPAREN orXor RPAREN {$v = "(" + orXor.v + ")";}
+            | VARIABLE          {$v = VARIABLE;}
+            ;
+
+OR = "or";
+XOR = "xor";
+AND = "and";
+NOT = "not";
+LPAREN = "(";
+RPAREN = ")";
+VARIABLE : "[a-z]";
+END = "$";
